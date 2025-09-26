@@ -11,14 +11,55 @@
     <main id="container"></main>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <script>
+    <script type="text/babel">
 
-        const Titulo = <h1> Hellow React!</h1>
+        function ChatInput() {
+            return (
+                <div>
+                    <input type="text" placeholder="Send a message to Chatbot" size="30" />
+                    <button>Send</button>
+                </div>
+            )
+        }
 
+        function ChatMessage({ message, sender }) {
+
+
+            // if (sender === 'robat') {
+            //     return (
+            //         <div>
+            //             <img src="./assets/robot.png" width="50" alt="" />
+            //             {message}
+            //         </div>
+            //     )
+            // }
+
+
+            return (
+                <div>
+                    {sender === 'robot' && <img src="./assets/robot.png" width="50" alt=""/>}
+                    {message}
+                    {sender === 'user' && <img src="./assets/user.png" width="50" alt=""/>}
+                </div>
+            )
+        }
+
+        function App() {
+            return (
+                <>
+                    <ChatInput />
+                    <ChatMessage message="Hello!" sender="user"/>
+                    <ChatMessage message="Hello! How can I Help you?" sender="robot"/>
+                    <ChatMessage message="Get date today?" sender="user"/>
+                    <ChatMessage message="Today is September 25" sender="robot"/>
+                </>
+            )
+        }
         const container = document.querySelector('#container')
         const root = ReactDOM.createRoot(container)
-        root.render('Hello, React!')
+        root.render(<App />)
 
     </script>
 </body>
